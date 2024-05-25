@@ -53,6 +53,6 @@ Once both the server and client are set up, you should be able to access the cha
 ## Additional Information
 
 - **Backend**: The server is set up using Node.js and connects to a MongoDB database.
-- **Frontend**: The client side is built with modern JavaScript frameworks and tools.
+- **Frontend**: The client side is built with React js and Tailwind css.
 
 Happy chatting!
