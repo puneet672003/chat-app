@@ -10,6 +10,7 @@ Before you begin, ensure you have the following installed:
 
 - **Node.js**: Download and install from [Node.js official website](https://nodejs.org/).
 - **MongoDB**: Ensure MongoDB service is running. You can start it using `mongod`.
+- **DataBase**: Ensure you have a db setup with collections: credentials, publics and socials.
 
 ## Setup Instructions
 
