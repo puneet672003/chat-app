@@ -2,6 +2,8 @@
 
 Welcome to the Chat App! This README will guide you through the installation and setup process to get your chat application up and running.
 
+Watch the demo of this chat application on YouTube: [Chat App Demo](https://www.youtube.com/watch?v=_11_Q9bmtDc)
+
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
