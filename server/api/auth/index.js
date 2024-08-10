@@ -54,7 +54,7 @@ app.get("/refresh", async (req, res) => {
 	res.cookie("token", token, {
 		httpOnly: true,
 		secure: USE_HTTPS,
-		sameSite: "lax",
+		sameSite: "none",
 		maxAge: authUtils.ACCESS_TOKEN.expiresIn.ms,
 	});
 
