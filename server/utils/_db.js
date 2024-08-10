@@ -4,8 +4,7 @@ const logger = require("../logger");
 require("dotenv").config();
 
 // constants
-const DB_PORT = process.env.DB_PORT;
-const DB_HOST = process.env.DB_HOST;
+const DB_URL = process.env.DB_URL;
 const DB_NAME = process.env.DB_NAME;
 
 const credsSchema = new mongoose.Schema({
@@ -39,7 +38,7 @@ const socialCollection = new mongoose.model("socials", socialSchema);
 async function connect_db() {
 	try {
 		logger.info("Connecting to database.");
-		await mongoose.connect(`mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`);
+		await mongoose.connect(`${DB_URL}/${DB_NAME}`);
 	} catch (error) {
 		return logger.error("Cannnot connect to db: ", error);
 	}
