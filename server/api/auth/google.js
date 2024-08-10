@@ -128,17 +128,17 @@ app.get(CALLBACK_ENDPOINT, async (req, res) => {
 		res.cookie("refreshToken", token, {
 			httpOnly: true,
 			secure: USE_HTTPS, // true when in production
-			sameSite: "lax",
+			sameSite: "none",
 			path: authUtils.REFRESH_TOKEN.path,
 			maxAge: authUtils.REFRESH_TOKEN.expiresIn.ms,
 		});
 
-		res.redirect("http://localhost:5173/app");
+		res.redirect("https://vibexchat.vercel.app/");
 	} else {
 		req.googleTokens = tokens;
 		req.session.googleid = googleid;
 
-		res.redirect("http://localhost:5173/google/register");
+		res.redirect("https://vibexchat.vercel.app/google/register");
 	}
 });
 

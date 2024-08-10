@@ -101,7 +101,7 @@ app.post("/login", async (req, res) => {
 			res.cookie("refreshToken", token, {
 				httpOnly: true,
 				secure: USE_HTTPS, // true when in production
-				sameSite: "lax",
+				sameSite: "none",
 				path: authUtils.REFRESH_TOKEN.path,
 				maxAge: authUtils.REFRESH_TOKEN.expiresIn.ms,
 			});
