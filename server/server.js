@@ -21,9 +21,10 @@ const ws = new webSocket(httpServer);
 
 // middlewares
 if (DEVELOPMENT) {
+	console.log("heuehe");
 	app.use(
 		cors({
-			origin: "*",
+			origin: process.env.DEVELOPMENT_URL,
 			credentials: true,
 		})
 	);
