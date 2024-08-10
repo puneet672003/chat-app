@@ -13,18 +13,29 @@ require("dotenv").config();
 
 const SERVER_PORT = Number(process.env.SERVER_PORT);
 const USE_HTTPS = Boolean(Number(process.env.USE_HTTPS));
+const DEVELOPMENT = Boolean(Number(process.env.DEVELOPMENT));
 
 const app = express();
 const httpServer = http.createServer(app);
 const ws = new webSocket(httpServer);
 
 // middlewares
-app.use(
-	cors({
-		origin: process.env.WEB_URL,
-		credentials: true,
-	})
-);
+if (DEVELOPMENT) {
+	app.use(
+		cors({
+			origin: "*",
+			credentials: true,
+		})
+	);
+} else {
+	app.use(
+		cors({
+			origin: process.env.WEB_URL,
+			credentials: true,
+		})
+	);
+}
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(
