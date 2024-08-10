@@ -5,12 +5,16 @@ import Login from "./tabs/Auth/Login";
 import Home from "./tabs/App/Home";
 import GoogleRegister from "./tabs/Auth/Google";
 import Notification from "./components/Notification";
+import MobileWarning from "./components/MobileWarning";
+import { Loading } from "./tabs/_layout";
 
+import useIsMobile from "./hooks/useMobile";
 import { useAuth } from "./context/AuthContext";
 import { API_BASE_URL } from "./utils/constants";
 
 export default function App() {
 	const isMounted = useRef(true);
+	const isMobile = useIsMobile();
 	const { authenticated, setAuthenticated } = useAuth();
 
 	const [loading, setLoading] = useState(true);
@@ -52,8 +56,16 @@ export default function App() {
 		};
 	});
 
+	if (isMobile) {
+		return <MobileWarning />;
+	}
+
 	if (loading) {
-		return <h1>Loading.......</h1>;
+		return (
+			<div className="flex items-center justify-center w-screen h-screen max-h-screen bg-[#131217]">
+				<Loading />
+			</div>
+		);
 	}
 
 	return (
