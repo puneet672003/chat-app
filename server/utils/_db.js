@@ -44,6 +44,7 @@ async function connect_db() {
 	}
 
 	logger.info("Connected to database.");
+	return mongoose;
 }
 
 module.exports = {

@@ -3,6 +3,7 @@ const cors = require("cors");
 const express = require("express");
 const session = require("express-session");
 const http = require("http");
+const MongoStore = require("connect-mongo");
 
 const db = require("./utils/_db");
 const api = require("./api");
@@ -18,6 +19,8 @@ const DEVELOPMENT = Boolean(Number(process.env.DEVELOPMENT));
 const app = express();
 const httpServer = http.createServer(app);
 const ws = new webSocket(httpServer);
+
+const mongoose = await db.connect_db();
 
 // middlewares
 if (DEVELOPMENT) {
@@ -44,6 +47,7 @@ app.use(
 		secret: process.env.SESSION_SECRET,
 		resave: false,
 		saveUninitialized: true,
+		store: MongoStore.create({ mongooseConnection: mongoose.connection }),
 		cookie: { secure: USE_HTTPS, httpOnly: true, sameSite: "none" },
 	})
 );
@@ -69,8 +73,6 @@ app.use((err, req, res, next) => {
 });
 
 async function main() {
-	await db.connect_db();
-
 	httpServer.listen(SERVER_PORT, (error) => {
 		if (error) logger.error(error);
 		else {
