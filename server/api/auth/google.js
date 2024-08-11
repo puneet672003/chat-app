@@ -38,6 +38,7 @@ app.post("/register", async (req, res) => {
 		return res.status(400).send("Bad Request: No userid specified");
 
 	const googleid = req.session?.googleid;
+	console.log(req.session);
 	if (!googleid)
 		return res.status(400).send("Bad Request: No google id specified");
 
