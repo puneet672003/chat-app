@@ -85,7 +85,7 @@ app.get(CALLBACK_ENDPOINT, async (req, res) => {
 	try {
 		const tokenResponse = await oauth2Client.getToken({
 			code: code,
-			redirect_uri: "https://vibexchat.vercel.app/google/register",
+			redirect_uri: CALLBACK_URL,
 		});
 
 		tokens = tokenResponse.tokens;
