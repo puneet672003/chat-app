@@ -20,24 +20,16 @@ const app = express();
 const httpServer = http.createServer(app);
 const ws = new webSocket(httpServer);
 
+app.set("trust proxy", 1);
+
 async function main() {
 	try {
 		// Connect to the database
 		const mongoose = await db.connect_db();
 
 		// Configure session middleware
-		app.use(
-			session({
-				secret: process.env.SESSION_SECRET,
-				resave: false,
-				saveUninitialized: true,
-				store: MongoStore.create({
-					mongoUrl: `${process.env.DB_URL}/${process.env.DB_NAME}`, // Updated to use mongoUrl
-					mongooseConnection: mongoose.connection,
-				}),
-				cookie: { secure: USE_HTTPS, httpOnly: true, sameSite: "lax" },
-			})
-		);
+		app.use(cookieParser());
+		app.use(express.json());
 
 		// Setup middlewares
 		if (DEVELOPMENT) {
@@ -56,8 +48,18 @@ async function main() {
 			);
 		}
 
-		app.use(cookieParser());
-		app.use(express.json());
+		app.use(
+			session({
+				secret: process.env.SESSION_SECRET,
+				resave: false,
+				saveUninitialized: true,
+				store: MongoStore.create({
+					mongoUrl: `${process.env.DB_URL}/${process.env.DB_NAME}`, // Updated to use mongoUrl
+					mongooseConnection: mongoose.connection,
+				}),
+				cookie: { secure: USE_HTTPS, httpOnly: true, sameSite: "none" },
+			})
+		);
 
 		app.use("/api", (req, res, next) => {
 			req.ws = ws;
