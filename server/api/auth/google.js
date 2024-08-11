@@ -38,7 +38,7 @@ app.post("/register", async (req, res) => {
 		return res.status(400).send("Bad Request: No userid specified");
 
 	const googleid = req.session?.googleid;
-	console.log(req.session);
+	console.log(req.sessionID);
 	if (!googleid)
 		return res.status(400).send("Bad Request: No google id specified");
 
@@ -141,7 +141,7 @@ app.get(CALLBACK_ENDPOINT, async (req, res) => {
 		req.session.googleid = googleid;
 
 		console.log("set google id");
-		console.log(req.session);
+		console.log(req.sessionID);
 
 		res.redirect("https://vibexchat.vercel.app/google/register");
 	}

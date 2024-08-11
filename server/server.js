@@ -17,7 +17,6 @@ const USE_HTTPS = Boolean(Number(process.env.USE_HTTPS));
 const DEVELOPMENT = Boolean(Number(process.env.DEVELOPMENT));
 
 const app = express();
-app.set("trust proxy", 1);
 
 const httpServer = http.createServer(app);
 const ws = new webSocket(httpServer);
@@ -28,6 +27,7 @@ async function main() {
 		const mongoose = await db.connect_db();
 
 		// Configure session middleware
+		app.set("trust proxy", 1);
 		app.use(cookieParser());
 		app.use(express.json());
 
