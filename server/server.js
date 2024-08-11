@@ -27,7 +27,13 @@ async function main() {
 		const mongoose = await db.connect_db();
 
 		// Configure session middleware
-		app.set("trust proxy", 1);
+		app.set("trust proxy", true);
+		app.use((req, res, next) => {
+			console.log("X-Forwarded-For:", req.headers["x-forwarded-for"]);
+			console.log("X-Forwarded-Proto:", req.headers["x-forwarded-proto"]);
+			next();
+		});
+
 		app.use(cookieParser());
 		app.use(express.json());
 
