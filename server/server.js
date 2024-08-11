@@ -44,7 +44,7 @@ app.use(
 		secret: process.env.SESSION_SECRET,
 		resave: false,
 		saveUninitialized: true,
-		cookie: { secure: USE_HTTPS, httpOnly: true, sameSite: "lax" },
+		cookie: { secure: USE_HTTPS, httpOnly: true, sameSite: "none" },
 	})
 );
 
