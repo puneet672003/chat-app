@@ -85,7 +85,8 @@ app.get(CALLBACK_ENDPOINT, async (req, res) => {
 	try {
 		const tokenResponse = await oauth2Client.getToken({
 			code: code,
-			redirect_uri: CALLBACK_URL,
+			redirect_uri:
+				"https://chat-app-rmfi.onrender.com/api/auth/google/callback",
 		});
 
 		tokens = tokenResponse.tokens;
