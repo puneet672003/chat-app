@@ -139,6 +139,9 @@ app.get(CALLBACK_ENDPOINT, async (req, res) => {
 		req.googleTokens = tokens;
 		req.session.googleid = googleid;
 
+		console.log("set google id");
+		console.log(req.session);
+
 		res.redirect("https://vibexchat.vercel.app/google/register");
 	}
 });
