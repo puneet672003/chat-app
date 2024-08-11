@@ -35,7 +35,7 @@ async function main() {
 					mongoUrl: `${process.env.DB_URL}/${process.env.DB_NAME}`, // Updated to use mongoUrl
 					mongooseConnection: mongoose.connection,
 				}),
-				cookie: { secure: USE_HTTPS, httpOnly: true, sameSite: "none" },
+				cookie: { secure: USE_HTTPS, httpOnly: true, sameSite: "lax" },
 			})
 		);
 
