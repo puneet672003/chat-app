@@ -59,6 +59,8 @@ async function main() {
 				secret: process.env.SESSION_SECRET,
 				resave: false,
 				saveUninitialized: true,
+				proxy: true,
+				name: "vibexchatBackend",
 				store: MongoStore.create({
 					mongoUrl: `${process.env.DB_URL}/${process.env.DB_NAME}`, // Updated to use mongoUrl
 					mongooseConnection: mongoose.connection,
