@@ -34,7 +34,7 @@ function AddButton({ submitFunction, children }) {
 	return (
 		<button
 			onClick={submitFunction}
-			className="py-2 text-white rounded-lg px-8 duration-200 bg-[#5e5fa3] hover:bg-[#6f71c4]"
+			className="relative py-2 text-white rounded-lg px-8 duration-200 bg-[#5e5fa3] hover:bg-[#6f71c4]"
 		>
 			{children}
 		</button>
@@ -155,6 +155,7 @@ export default function AddFriendTab({}) {
 	const [loading, setLoading] = useState(false);
 	const [addFriend, setAddFriend] = useState(false);
 	const [query, setQuery] = useState("");
+	const [sent, setSent] = useState(false);
 
 	const handleChange = (e) => {
 		e.preventDefault();
@@ -181,6 +182,7 @@ export default function AddFriendTab({}) {
 				username: jsonData.data.userid,
 				displayname: jsonData.data.displayname,
 			});
+			setSent(true);
 		}
 
 		setQuery("");
@@ -238,6 +240,11 @@ export default function AddFriendTab({}) {
 							{Object.keys(friendDetails).length !== 0 && (
 								<AddButton submitFunction={submitRequest}>
 									Send Request
+									{sent && (
+										<span className="absolute w-full h-full rounded-lg top-0 left-0 bg-[#5e5fa3] flex justify-center items-center">
+											[✔] Sent
+										</span>
+									)}
 								</AddButton>
 							)}
 						</BottomWrapper>
