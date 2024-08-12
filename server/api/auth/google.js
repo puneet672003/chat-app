@@ -29,7 +29,7 @@ const scopes = ["openid", "profile", "email"];
 const url = oauth2Client.generateAuthUrl({
 	access_type: "offline",
 	scope: scopes,
-	// redirect_uri: CALLBACK_URL.href,
+	redirect_uri: CALLBACK_URL.href,
 	state: "state",
 });
 
@@ -87,8 +87,7 @@ app.get(CALLBACK_ENDPOINT, async (req, res) => {
 	try {
 		const tokenResponse = await oauth2Client.getToken({
 			code: code,
-			redirect_uri:
-				"https://chat-app-rmfi.onrender.com/api/auth/google/callback",
+			redirect_uri: CALLBACK_URL.href,
 		});
 
 		tokens = tokenResponse.tokens;
