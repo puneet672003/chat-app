@@ -182,7 +182,6 @@ export default function AddFriendTab({}) {
 				username: jsonData.data.userid,
 				displayname: jsonData.data.displayname,
 			});
-			setSent(true);
 		}
 
 		setQuery("");
@@ -200,7 +199,10 @@ export default function AddFriendTab({}) {
 			},
 		});
 
-		if (res.ok) toast.success("Request sent!");
+		if (res.ok) {
+			setSent(true);
+			toast.success("Request sent!");
+		}
 	};
 
 	return (
