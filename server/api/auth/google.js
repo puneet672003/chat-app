@@ -30,6 +30,7 @@ const url = oauth2Client.generateAuthUrl({
 	access_type: "offline",
 	scope: scopes,
 	// redirect_uri: CALLBACK_URL.href,
+	state: "state",
 });
 
 app.post("/register", async (req, res) => {
